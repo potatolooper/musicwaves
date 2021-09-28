@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="../style.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <title>Canciones</title>
+</head>
+<body style="background-color:rgb(29, 185, 84);">
+                <h1 class="title">Canciones de {{Name}}</h1>
+
+    <div class="songs">
+        <ul class="songs">
+            <li class="first_label"><div>Nombre</div><div>Artista</div><div>Duracion</div></li>
+    {{#each Songs}}
+        
+        <li><div class="name">{{this.name}}</div> <div class="artist" ></div> <div class="message"></div> </li>
+       
+        {{/each}}
+        </ul> 
+         
+        
+        
+    </div>
+
+   
+
+     <footer>
+      <ul>
+          <li>
+            Acerca De
+          </li>
+          <li>
+            Licencias Y Permisos
+          </li>
+          <li>
+            Contacto
+          </li>
+      </ul>
+    </footer>
+</body>
+    <script>
+       var divart =  $('.artist')
+        console.log(window.location.href)
+        var artists = [];
+        var durations = [];
+
+
+    function millisToMinutesAndSeconds(millis)  {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
+}
+
+        {{#each Artists}}
+            artists.push('{{this}}')
+        {{/each}}
+    
+        {{#each Durations}}
+            durations.push(millisToMinutesAndSeconds('{{this}}'))
+        {{/each}}
+        
+       for (let i = 0; i < artists.length; i++) {
+            const li = $('ul.songs').children()[i+1];
+            li.children[1].innerHTML= artists[i]
+            li.children[2].innerHTML= durations[i] + " min";
+            
+    }
+  
+        console.log(artists)
+        
+    </script>
+</html>

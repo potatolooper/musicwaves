@@ -1,0 +1,63 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type='text/css' href="../style.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <title>Logeado</title>
+</head>
+
+<body style="background-color:rgb(29, 185, 84);" >
+    <div id="Intro" >
+        <img src="{{ImageUser}}" alt="Imagen Usuario" width="100px" height="100px"> Bienvenido {{User}} </div>
+    <div id="list">
+        
+    </div>
+ <footer>
+      <ul>
+          <li>
+            Acerca De
+          </li>
+          <li>
+            Licencias Y Permisos
+          </li>
+          <li>
+            Contacto
+          </li>
+      </ul>
+    </footer>
+</body>
+   <script src="../LogIN.js"></script>
+   <script>
+     var list = $("#list");
+    
+let info = '{{Total}}';
+let infoarry = info.split(',');
+console.log(infoarry)
+let nameplaylist = infoarry.slice((infoarry.length)/2)
+
+let idplaylist = infoarry.slice(0,(infoarry.length/2))
+
+
+for (let i = 0; i <nameplaylist.length; i++) {
+     const np = nameplaylist[i];
+      let names = document.createElement("div");
+      let as = document.createElement("a");
+      as.setAttribute("href","/songs?id="+idplaylist[i]+"&name="+np)
+      names.setAttribute("id",idplaylist[i])
+      as.append(np) 
+     names.append(as)
+    console.log(names)
+    list.append(names)  
+   }
+
+let divs = list.children("divs")
+
+//  let playlistID = '{{PlaylistID}}'
+//  let playlistIDarray = playlistID.split(',')
+
+   </script>
+</html>

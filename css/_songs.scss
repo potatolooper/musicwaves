@@ -1,0 +1,31 @@
+
+h1.title{
+    text-align: center;
+}
+
+ul.songs{
+list-style: none;
+
+}
+
+ul.songs li{
+    border-style: solid;
+    border-color: rgb(92, 131, 0);
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
+    border-width: 1px;
+    margin: 20px;
+}
+ul.songs .first_label{
+    border-style: ridge;
+    border-bottom-color: rgb(0, 161, 121);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-width: 10px;
+   
+}
+div.songs{
+    margin: 50px;
+    font-size: 20px;
+}
