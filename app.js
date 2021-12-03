@@ -53,7 +53,9 @@ app.get("/log", (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
 
-//Spotify Functions __________________________________
+//Spotify Functions ______________  
+//Potatolooper@gmail.com
+//proyectofinal
 
 //Get Profile Data from User
 function getData(token) {
