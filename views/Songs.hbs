@@ -16,7 +16,7 @@
             <li class="first_label"><div>Nombre</div><div>Artista</div><div>Duracion</div></li>
     {{#each Songs}}
         
-        <li><div class="name">{{this.name}}</div> <div class="artist" ></div> <div class="message"></div> </li>
+        <li><div class="name">{{this.name}}</div> <div class="artist" ></div> <div class="duration"></div> </li>
        
         {{/each}}
         </ul> 
@@ -43,16 +43,18 @@
 </body>
     <script>
        var divart =  $('.artist')
-        console.log(window.location.href)
         var artists = [];
         var durations = [];
-
+        var songs_ids = [];
 
     function millisToMinutesAndSeconds(millis)  {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
     return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
 }
+
+       
+         
 
         {{#each Artists}}
             artists.push('{{this}}')
@@ -61,15 +63,22 @@
         {{#each Durations}}
             durations.push(millisToMinutesAndSeconds('{{this}}'))
         {{/each}}
+  
+  
+        {{#each Ids}}
+            songs_ids.push('{{this}}')
+        {{/each}}
+
         
        for (let i = 0; i < artists.length; i++) {
             const li = $('ul.songs').children()[i+1];
+            li.setAttribute("id",songs_ids[i])
             li.children[1].innerHTML= artists[i]
             li.children[2].innerHTML= durations[i] + " min";
             
     }
   
-        console.log(artists)
+        
         
     </script>
 </html>

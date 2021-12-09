@@ -49,7 +49,7 @@ app.use(express.static(__dirname + '/scripts'));
 
 
 app.get("/log", (req, res) => {
-  songscontroller.message();
+ // songscontroller.message();
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
 
@@ -109,7 +109,7 @@ async function getPlaylistTracks(playlistId) {
       let track = track_obj.track;
        tracks.push(track) 
         
-       console.log(" this Is the Endaaaa ____"+i+"__________________________"); 
+      // console.log(" this Is the Endaaaa ____"+i+"__________________________"); 
        i++;  
     }
     if (total.body.total >100){
@@ -122,7 +122,7 @@ async function getPlaylistTracks(playlistId) {
       for (let track_obj of data.body.items) {
         let track = track_obj.track;
          tracks.push(track) 
-         console.log(" this Is the Endaaaa ____"+i+"__________________________"); 
+         //console.log(" this Is the Endaaaa ____"+i+"__________________________"); 
          i++;  
       }
     }
@@ -221,8 +221,10 @@ app.get("/LogIN", (req, res) => {
   });
 });
 
+/*
+Creacion de la pagina con las canciones
 
-
+**/
 
 app.get("/songs",(req,res)=>{
 
@@ -231,16 +233,21 @@ app.get("/songs",(req,res)=>{
     .then(songs =>{  
       let artists = [];
       let durations = [];
+      let songs_ids = [];
 for (const ar of songs) {
     artists.push(ar.artists[0].name);
 };
 for (const durar of songs) {
       durations.push(durar.duration_ms)
 }
+for (const ids of songs) {
+  songs_ids.push(ids.id)
+}
+songscontroller.addSongs(songs_ids)
   res.type("text/html");  
   res.render("Songs.hbs",
           {
-            Id:playid,
+            Ids:songs_ids,
             Name:req.query.name,
             Songs:songs, 
             Artists:artists,

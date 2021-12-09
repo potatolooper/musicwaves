@@ -12,9 +12,13 @@ exports.register = async (req,res)=>{
         const pass = req.query.pass
         let passHash = await bcryptjs.hash(pass,8)
         //console.log(passHash)
-        connection.query('INSERT INTO profiles SET ?',{Email:email,Usuario:user,Password:passHash},(error,result)=>{
-            if (error) {console.log(error)}
-           res.redirect('/?register=yes') 
+        connection.query('INSERT INTO profiles SET ?',{Email:email,User:user,Password:passHash},(error,result)=>{
+            if (error) {
+                console.log(error)}
+            else{
+                 res.redirect('/?register=yes')
+            }
+           
            
             
         })
@@ -34,7 +38,10 @@ exports.login = async(req,res)=>{
             res.send("Tienes que rellenar los dos campos "+ 
             "<a href='/'> Volver</a>")
         }else{
-            connection.query('SELECT * FROM profiles WHERE Usuario = ?', [user],async(error,result)=>{
+            connection.query('SELECT * FROM profiles WHERE User = ?', [user],async(error,result)=>{
+                if (result == undefined) {
+                    res.send("No se ha encontrado Usuario")
+                }
                 if (result.lenght ==0 || ! (await  bcryptjs.compare(pass,result[0].Password))) {
                     res.send("La contraseña es Incorrecta")
                 }else{

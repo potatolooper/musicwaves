@@ -2,20 +2,28 @@ const connection = require('../Database/db')
 
 
 
-exports.addSongs = async(req,res)=>{
+exports.addSongs = async(ids,req,res)=>{
 
         try {
-            const songs = "";
-            const name = "";
-            
-            
-        } catch (error) {
+            for (const id of ids) {
+            connection.query('SELECT * FROM songs WHERE Code_Song = ?', [id],async(error,result)=>{
+                        if (result== undefined ) {
+             connection.query('INSERT INTO songs SET ?',{Code_Song:id},(error,result)=>{
+                if (error) {
+                console.log("Se a producido un error al meter los ids en la base de datos: "+error)
+            }
 
-            console.log(error)
+             })        
+                        }
+            })
+           
+            } 
+        } catch (error) {
+            console.log("No se ha podido cargar los ids de las canciones : "+error)
         }
 
 }
 
-exports.message = async(req,res)=>{
-        console.log(" HEEEEEE ")
+exports.message = async(prueba,req,res)=>{
+        console.log(prueba)
 }
