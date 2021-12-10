@@ -303,19 +303,16 @@ ul.songs {
 }
 
 ul.songs li {
-  border-style: solid;
-  border-color: #5c8300;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 40% 40% 20%;
-      grid-template-columns: 40% 40% 20%;
-  border-width: 1px;
+  -ms-grid-columns: 30% 30% 30% 5%;
+      grid-template-columns: 30% 30% 30% 5%;
   margin: 20px;
 }
 
 ul.songs .first_label {
   border-style: ridge;
-  border-bottom-color: #00a179;
+  border-bottom-color: #00a37a;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -323,6 +320,68 @@ ul.songs .first_label {
 }
 
 div.songs {
+  margin: 50px;
+  font-size: 20px;
+}
+
+button.env_messages {
+  border: none;
+  background-color: #7df0a5;
+}
+
+.title {
+  text-align: center;
+}
+
+ul.comments {
+  list-style: none;
+}
+
+ul.comments li {
+  border-style: solid;
+  border-color: rgba(10, 124, 0, 0.774);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 93% 5%;
+      grid-template-columns: 93% 5%;
+  -ms-grid-rows: 30% 20%;
+      grid-template-rows: 30% 20%;
+  border-width: 5px;
+  border-radius: 10px;
+  padding: 1%;
+  margin: 5px;
+}
+
+form.comments {
+  margin-top: 5px;
+}
+
+form.comments textarea {
+  border-color: #66f309;
+  border-radius: 20px;
+}
+
+form.comments button {
+  border-color: #66f309;
+  border-radius: 5px;
+  padding: 0px 10px;
+  margin-left: 100%;
+}
+
+div.puntuation {
+  text-align: left;
+}
+
+button.positives, button.negative {
+  border: none;
+  font-size: larger;
+}
+
+div.user {
+  margin: 0px;
+}
+
+div.comments {
   margin: 50px;
   font-size: 20px;
 }

@@ -1,0 +1,52 @@
+.title{
+    text-align: center;
+}
+
+ul.comments{
+    list-style: none;
+    
+    }
+
+    ul.comments li{
+        border-style: solid;
+        border-color: rgba(10, 124, 0, 0.774); 
+        display: grid;
+        grid-template-columns: 93% 5%;
+        grid-template-rows: 30% 20% ;
+        border-width: 5px;
+        border-radius: 10px;
+        padding: 1%;
+        margin: 5px;
+    }
+    form.comments{
+       margin-top: 5px;
+       
+    }
+    form.comments textarea{
+        border-color: rgb(102, 243, 9);
+        border-radius: 20px;
+        
+    }
+    form.comments button{
+        border-color: rgb(102, 243, 9);
+        border-radius: 5px;
+        padding: 0px 10px;
+        margin-left: 100%;
+    }
+
+    div.puntuation{
+        text-align: left;
+    }
+    button.positives,button.negative{
+       border: none;
+       font-size: larger;
+    }
+
+    div.user{
+        margin: 0px;
+    }
+    
+    div.comments{
+        margin: 50px;
+        font-size: 20px;
+    }

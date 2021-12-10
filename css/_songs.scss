@@ -9,16 +9,13 @@ list-style: none;
 }
 
 ul.songs li{
-    border-style: solid;
-    border-color: rgb(92, 131, 0);
     display: grid;
-    grid-template-columns: 40% 40% 20%;
-    border-width: 1px;
+    grid-template-columns: 30% 30% 30% 5%;
     margin: 20px;
 }
 ul.songs .first_label{
     border-style: ridge;
-    border-bottom-color: rgb(0, 161, 121);
+    border-bottom-color: rgb(0, 163, 122);
     border-top: none;
     border-left: none;
     border-right: none;
@@ -28,4 +25,9 @@ ul.songs .first_label{
 div.songs{
     margin: 50px;
     font-size: 20px;
+}
+
+button.env_messages{
+    border:none;
+    background-color: rgb(125, 240, 165);
 }

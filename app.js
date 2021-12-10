@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const connection = require('./Database/db')
 const authcontroller = require('./Controlers/authController')
 const songscontroller = require('./Controlers/songsController')
+const meesagescontroller = require('./Controlers/messagesController')
 const scopes = [
   "ugc-image-upload",
   "user-read-playback-state",
@@ -221,6 +222,7 @@ app.get("/LogIN", (req, res) => {
   });
 });
 
+
 /*
 Creacion de la pagina con las canciones
 
@@ -258,7 +260,20 @@ songscontroller.addSongs(songs_ids)
             res.send(html);
           });
       })
-  console.log()
+})
+
+
+
+app.get("/msg",(req,res)=>{
+  res.type("text/html");  
+  res.render("Messages.hbs",{
+            Name:"A"
+  },
+  function (err, html) {
+    if (err) throw err;
+    res.send(html);
+  });
+
 })
 
 
