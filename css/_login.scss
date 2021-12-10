@@ -1,5 +1,29 @@
 div#intro{
- text-align: left;
+ text-align: right;
+    margin: 20px;
+    margin-bottom:100px;
+}
 
+div#intro img{
+        border-style: solid;
+        border-radius:10px;
+        border-color: rgb(158, 233, 184);
+        margin-right: 1.5%;
+    }
+
+div#wel{
+    margin:5px;
+}    
+
+div#list{
+
+    text-align: center;
+    padding: 10px 0px;
+    display: -ms-grid;
+    display: grid;
+    border-style: solid;
+    border-radius: 10px;
+    margin: 5px;
+    grid-auto-rows: 50px;
 }
 

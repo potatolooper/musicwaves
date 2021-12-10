@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const connection = require('./Database/db')
 const authcontroller = require('./Controlers/authController')
 const songscontroller = require('./Controlers/songsController')
-const meesagescontroller = require('./Controlers/messagesController')
+const messagescontroller = require('./Controlers/messagesController')
 const scopes = [
   "ugc-image-upload",
   "user-read-playback-state",
@@ -233,6 +233,14 @@ app.get("/songs",(req,res)=>{
    let playid = req.query.id
     getPlaylistTracks(playid)
     .then(songs =>{  
+    
+    spotifyApi.getMe()
+      .then((u) => {
+        var image = " "
+        if(!(u.body.images.length===0)){
+           image = u.body.images[0].url
+        } 
+
       let artists = [];
       let durations = [];
       let songs_ids = [];
@@ -251,6 +259,7 @@ songscontroller.addSongs(songs_ids)
           {
             Ids:songs_ids,
             Name:req.query.name,
+            ImageUser:image,
             Songs:songs, 
             Artists:artists,
             Durations:durations
@@ -259,23 +268,39 @@ songscontroller.addSongs(songs_ids)
             if (err) throw err;
             res.send(html);
           });
-      })
+        })
+
+        })
 })
 
 
 
 app.get("/msg",(req,res)=>{
-  res.type("text/html");  
+
+ var message = messagescontroller.getMessages(req.query.song_id)
+ message.then(m =>{
+    console.log(m);
+ }) 
+ spotifyApi.getMe()
+ .then((u) => {
+   var image = " "
+   if(!(u.body.images.length===0)){
+      image = u.body.images[0].url
+   } 
+
+ res.type("text/html");  
   res.render("Messages.hbs",{
-            Name:"A"
+            Name:"A",
+            ImageUser:image
   },
   function (err, html) {
     if (err) throw err;
     res.send(html);
   });
-
+ })
 })
 
+app.post("/envmsg",messagescontroller.addMessage)
 
 app.listen(8888, () =>
   console.log( 
