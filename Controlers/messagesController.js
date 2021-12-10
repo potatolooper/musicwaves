@@ -51,7 +51,7 @@ exports.addPositive = async(req,res)=>{
         connection.query('SELECT Positive FROM message WHERE Id = ?',[id],async(error,result)=>{
                 if (result!= undefined) {
                     points = result
-         connection.query('REPLACE INTO message (Positive) VALUES (?)',points,async(error,result)=>{
+         connection.query('UPDATE INTO message SET Positive = ?',points,async(error,result)=>{
 
          })           
                 }
@@ -69,7 +69,7 @@ exports.addNegative = async(req,res)=>{
         connection.query('SELECT Negative FROM message WHERE Id = ?',[id],async(error,result)=>{
                 if (result!= undefined) {
                     points = result
-         connection.query('REPLACE INTO message (Negative) VALUES (?)',points,async(error,result)=>{
+         connection.query('UPDATE INTO message SET Negative = ?',points,async(error,result)=>{
 
          })           
                 }

@@ -194,6 +194,8 @@ app.get("/register",authcontroller.register)
 
 app.post("/auth",authcontroller.login)
 
+
+
 app.get("/LogIN", (req, res) => {
   var data = getData(spotifyApi.getAccessToken());
   data("playlist").then(v => {      
@@ -236,6 +238,7 @@ app.get("/songs",(req,res)=>{
     
     spotifyApi.getMe()
       .then((u) => {
+        var user = u.body.display_name;
         var image = " "
         if(!(u.body.images.length===0)){
            image = u.body.images[0].url
@@ -259,6 +262,7 @@ songscontroller.addSongs(songs_ids)
           {
             Ids:songs_ids,
             Name:req.query.name,
+            User:user,
             ImageUser:image,
             Songs:songs, 
             Artists:artists,
@@ -291,6 +295,7 @@ app.get("/msg",(req,res)=>{
  res.type("text/html");  
   res.render("Messages.hbs",{
             Name:"A",
+            User:user,
             ImageUser:image
   },
   function (err, html) {
