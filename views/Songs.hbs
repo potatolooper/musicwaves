@@ -12,6 +12,7 @@
                 <h1 class="title">Canciones de {{Name}}</h1>
 <div id="intro" >
         <img src="{{ImageUser}}" alt="Imagen Usuario" width="100px" height="100px"> <div>Bienvenido {{User}} </div>
+        <div id="edit">Editar Perfil</div>
         </div>
     <div class="songs">
         <ul class="songs">
@@ -55,9 +56,6 @@
     var seconds = ((millis % 60000) / 1000).toFixed(0);
     return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
 }
-
-       
-    console.log("horse")
 
         {{#each Artists}}
             artists.push('{{this}}')

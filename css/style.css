@@ -237,9 +237,7 @@ ol, li {
 }
 
 div#login {
-  background: white;
-  background: -webkit-gradient(linear, left top, right top, from(white), color-stop(2%, #18b954), color-stop(98%, #1db954), to(white));
-  background: linear-gradient(90deg, white 0%, #18b954 2%, #1db954 98%, white 100%);
+  margin-top: 10px;
   margin-bottom: 30px;
   padding-left: 20px;
   display: -ms-grid;
@@ -418,5 +416,19 @@ div.user {
 div.comments {
   margin: 50px;
   font-size: 20px;
+}
+
+div.oldcomments {
+  background-color: white;
+  border-style: solid;
+  border-color: #66f309;
+  border-radius: 15px;
+  height: 100px;
+  width: 97%;
+}
+
+div.content {
+  text-align: center;
+  margin-top: 10px;
 }
 /*# sourceMappingURL=style.css.map */

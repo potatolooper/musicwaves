@@ -12,6 +12,7 @@ exports.register = async (req,res)=>{
         const pass = req.query.pass
         let passHash = await bcryptjs.hash(pass,8)
         //console.log(passHash)
+       
         connection.query('INSERT INTO profiles SET ?',{Email:email,User:user,Password:passHash},(error,result)=>{
             if (error) {
                 console.log(error)}

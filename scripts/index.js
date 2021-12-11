@@ -3,7 +3,7 @@ var register = $("#res")
 var user = $("#user")
 var pass = $("#pass")
 
-console.log(email.val())
+
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 const regis = urlParams.get('register')
@@ -20,7 +20,6 @@ register.on("click", function () {
         }else if (pass.val() === "") {
             pass.attr("placeholder","Tienes que introducir una Contraseña")
         }else if(email.val() != "" || user.val() != ""||pass.val() != "" ) { 
-            console.log(pass.val())
         
               window.location.href = "/register"+"?email="+email.val()+"&user="+user.val()+"&pass="+pass.val();          
         } 

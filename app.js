@@ -5,6 +5,7 @@ const connection = require('./Database/db')
 const authcontroller = require('./Controlers/authController')
 const songscontroller = require('./Controlers/songsController')
 const messagescontroller = require('./Controlers/messagesController')
+const Usuario = require("./scripts/Usuario")
 const scopes = [
   "ugc-image-upload",
   "user-read-playback-state",
@@ -190,7 +191,7 @@ app.get("/", (req, res) => {
 //   console.log(req.body.Password)
 // });
 
-app.get("/register",authcontroller.register)
+app.get("/register", authcontroller.register)
 
 app.post("/auth",authcontroller.login)
 
@@ -284,9 +285,14 @@ app.get("/msg",(req,res)=>{
  var message = messagescontroller.getMessages(req.query.song_id)
  message.then(m =>{
     console.log(m);
+  
  }) 
+ spotifyApi.getTrack(req.query.song_id)
+ .then((track)=>{
+   console.log(track.body.name)
  spotifyApi.getMe()
  .then((u) => {
+  var user = u.body.display_name;
    var image = " "
    if(!(u.body.images.length===0)){
       image = u.body.images[0].url
@@ -294,7 +300,8 @@ app.get("/msg",(req,res)=>{
 
  res.type("text/html");  
   res.render("Messages.hbs",{
-            Name:"A",
+            Song:track.body.name,
+            Name:user,
             User:user,
             ImageUser:image
   },
@@ -304,8 +311,12 @@ app.get("/msg",(req,res)=>{
   });
  })
 })
+})
 
 app.post("/envmsg",messagescontroller.addMessage)
+
+
+
 
 app.listen(8888, () =>
   console.log( 

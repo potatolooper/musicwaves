@@ -9,9 +9,10 @@
     <title>Comentarios</title>
 </head>
 <body style="background-color:rgb(29, 185, 84);">
-                <h1 class="title">Comentarios de </h1>
-<div id="Intro" >
+                <h1 class="title">Comentarios de {{Song}} </h1>
+<div id="intro" >
         <img src="{{ImageUser}}" alt="Imagen Usuario" width="100px" height="100px"> <div>Bienvenido {{User}} </div>
+      <div id="edit">Editar Perfil</div>
     </div>
     
     <div class="comments">
@@ -32,9 +33,21 @@
             </form> </li>
             {{#each Message}}
 
-            {{/each}}
-       
-       
+            <li>
+            <div class="user"> {{Name}}
+            </div>
+            <div class="puntuation">
+                <button class="positives" ><img src="../up-arrow.png" alt="flecha hacia arriba" srcset="">0</button>
+                <button class="negative" > <img src="../down-arrow.png" alt="flecha hacia abajo" srcset="">0</button>
+            </div>
+              <div class="oldcomments">
+                <div class="content">
+                      {{this}}
+                </div>
+              </div>
+
+            </li>
+         {{/each}}
         </ul> 
          
         
@@ -61,5 +74,10 @@
 
   var posi = $(".positive")
   var neg = $(".negative")
+   var edit = $("#edit")
+   edit.on("click",()=>{
+      window.location.href = "/edit";
+   })
+
 </script>
 </html>
