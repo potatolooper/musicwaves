@@ -282,14 +282,40 @@ songscontroller.addSongs(songs_ids)
 
 app.get("/msg",(req,res)=>{
 
- var message = messagescontroller.getMessages(req.query.song_id)
- message.then(m =>{
-    console.log(m);
-  
- }) 
+var id = req.query.song_id
+
+connection.query('SELECT * FROM message WHERE Id_Song = ?',[id],(error,result)=>{
+    if (result==undefined){
+        console.log("No hay mensajes de esa cancion : " + error)
+    }
+
+    var normales = []
+    var respuestas = []
+    for (let i = 0; i < result.length; i++) {
+            normales[i]=[]
+            if(result[i].Id_Messages){     
+              respuestas[i]=[]
+              respuestas[i]["Id"]=(result[i].Id)
+              respuestas[i]["Message_user"]=(result[i].Message_user)
+              respuestas[i]["Menssage"]=(result[i].Menssage)
+              respuestas[i]["Positive"]=(result[i].Positive)
+              respuestas[i]["Negative"]=(result[i].Negative)
+              respuestas[i]["Id_Messages"]=(result[i].Id_Messages)
+              debugger;
+
+    }else{
+            normales[i]["Id"]=(result[i].Id)
+            normales[i]["Message_user"]=(result[i].Message_user)
+            normales[i]["Menssage"]=(result[i].Menssage)
+            normales[i]["Positive"]=(result[i].Positive)
+            normales[i]["Negative"]=(result[i].Negative)
+            normales[i]["Id_Messages"]=(result[i].Id_Messages)
+            debugger;
+          }
+    }
+ 
  spotifyApi.getTrack(req.query.song_id)
  .then((track)=>{
-   console.log(track.body.name)
  spotifyApi.getMe()
  .then((u) => {
   var user = u.body.display_name;
@@ -303,7 +329,9 @@ app.get("/msg",(req,res)=>{
             Song:track.body.name,
             Name:user,
             User:user,
-            ImageUser:image
+            ImageUser:image,
+            Messages:normales,
+            Replys:respuestas
   },
   function (err, html) {
     if (err) throw err;
@@ -311,6 +339,7 @@ app.get("/msg",(req,res)=>{
   });
  })
 })
+}) 
 })
 
 app.post("/envmsg",messagescontroller.addMessage)

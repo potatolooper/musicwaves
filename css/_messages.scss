@@ -11,7 +11,7 @@ ul.comments{
         border-style: solid;
         border-color: rgba(10, 124, 0, 0.774); 
         display: grid;
-        grid-template-columns: 93% 5%;
+        grid-template-columns: 93% 6%;
         grid-template-rows: 30% 20% ;
         border-width: 5px;
         border-radius: 10px;
@@ -19,6 +19,8 @@ ul.comments{
         margin: 5px;
     }
     form.comments{
+        grid-column: 1;
+        grid-row: 2;
        margin-top: 5px;
        
     }
@@ -32,10 +34,11 @@ ul.comments{
         border-radius: 5px;
         padding: 0px 10px;
         margin-left: 100%;
+        margin-bottom: 2%;
     }
 
     div.puntuation{
-        text-align: left;
+        text-align: center;
     }
     button.positives,button.negative{
        border: none;
@@ -61,5 +64,36 @@ ul.comments{
     }
     div.content{
         text-align: center;
-        margin-top: 10px;
+        
+        margin-top: 1.5%;
+    }
+
+   ul.comments li.old{
+    margin-left: 5%;
+    grid-template-rows: 30% 20% 10%;
+    grid-template-columns: 93% 6%;
+    }
+
+    button.respuesta{
+        grid-row: 3;
+        grid-column: 2;
+        height: 50px;
+        border-color: rgb(102, 243, 9);
+        border-radius: 5px;  
+    }
+    ul.comments li.reply{
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 30%;
+        display: grid;
+        margin-left: 10%;
+    }
+    li.reply form{
+        grid-row: 1;
+        grid-column: 1;
+        
+    }
+    li.reply form button{
+       margin-left: 2px;
+       margin-bottom: 1px;
+        
     }
