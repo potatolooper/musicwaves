@@ -56,9 +56,9 @@
         <li class="reply" style="display: none;" >
             
             <form action="/envmsg" class="comments" method="post">
-           <input type="text" name="id_song" id="idong" style="display: none;" >
+           <input type="text" name="id_song" id="idong" style="display: none;" value="{{../Idong}}" >
             <input type="text" name="id_message" id="" style="display: none;" value="{{this.Id}}">
-             <input type="text" name="user" id="userrepl" style="display: none;" >
+             <input type="text" name="user" id="userrepl" style="display: none;" value="{{../Name}}" >
              <textarea name="message" id="message" cols="160" rows="5"></textarea>
             <button type="submit">Responder</button>
             </form> 
@@ -87,11 +87,23 @@
     </footer>
 </body>
 <script>
-var idong = $("#idong")
-  idong.val('{{Idong}}');
+  var forms = $("form.comments");
+for (let i = 0; i < forms.length; i++) {
+  $(forms[i]).on("submit",(e)=>{
+   
+    $("#idong")[0].setAttribute("value","{{Idong}}")
+    $("#idong").val("{{Idong}}")
 
-var userreply = $("#userrepl")
-  userreply.val('{{Name}}')
+    $("#userrepl")[0].setAttribute("value","{{Name}}")
+    $("#userrepl").val("{{Name}}")
+
+   
+  })
+
+
+}
+
+
 
   var posi = $(".positives")
   var neg = $(".negatives")
@@ -100,9 +112,9 @@ var userreply = $("#userrepl")
   
 
  for (let i = 0; i < posi.length; i++) {
-      console.log(posi[i])
+  
       $(posi[i]).on("click",(e)=>{
-          console.log(e.target)
+        
           var msg_id ="";
           var targ = $(e.target);
       if (targ.prop("tagName") == "IMG") {
@@ -116,9 +128,9 @@ var userreply = $("#userrepl")
      }
 
 for (let i = 0; i < neg.length; i++) {
-      console.log(neg[i])
+   
       $(neg[i]).on("click",(e)=>{
-      console.log(e.target)
+  
           var msg_id ="";
           var targ = $(e.target);
       if (targ.prop("tagName") == "IMG") {

@@ -274,7 +274,7 @@ app.get("/songs",(req,res)=>{
         if(!(u.body.images.length===0)){
            image = u.body.images[0].url
         } 
-      debugger;
+    
      
       let artists = [];
       let durations = [];
@@ -292,6 +292,7 @@ for (const ids of songs) {
 for (const img of songs) {
     songs_images.push(img.album.images[2].url)
 }
+debugger;
 songscontroller.addSongs(songs_ids)
   res.type("text/html");  
   res.render("Songs.hbs",
