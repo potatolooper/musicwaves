@@ -352,8 +352,7 @@ connection.query('SELECT * FROM message WHERE Id_Song = ?',[id],(error,result)=>
       
           }
     }
-    console.log(normales)
-    console.log(respuestas)
+   
 
  }
  spotifyApi.getTrack(req.query.song_id)
