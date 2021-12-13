@@ -327,6 +327,18 @@ div#list {
   grid-auto-rows: 50px;
 }
 
+button#volver {
+  margin-top: 1%;
+  border-color: #66f309;
+  border-radius: 5px;
+  padding: 0.5%;
+}
+
+img.img_pls {
+  height: 40px;
+  margin-right: 20px;
+}
+
 h1.title {
   text-align: center;
 }
@@ -338,8 +350,8 @@ ul.songs {
 ul.songs li {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 33% 35% 23% 5%;
-      grid-template-columns: 33% 35% 23% 5%;
+  -ms-grid-columns: 7% 33% 33% 22% 5%;
+      grid-template-columns: 7% 33% 33% 22% 5%;
   margin: 20px;
 }
 
@@ -396,6 +408,7 @@ form.comments {
 form.comments textarea {
   border-color: #66f309;
   border-radius: 20px;
+  padding: 10px;
 }
 
 form.comments button {
@@ -410,7 +423,7 @@ div.puntuation {
   text-align: center;
 }
 
-button.positives, button.negative {
+button.positives, button.negatives {
   border: none;
   font-size: larger;
 }
@@ -476,5 +489,59 @@ li.reply form {
 li.reply form button {
   margin-left: 2px;
   margin-bottom: 1px;
+}
+
+ul.comments li.old-r {
+  margin-left: 10%;
+}
+
+div#intro_editar {
+  text-align: center;
+  margin: 20px;
+  margin-bottom: 100px;
+  margin-right: 2%;
+}
+
+div#intro_editar img {
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #9ee9b8;
+}
+
+div.editar {
+  margin: 0px 10%;
+}
+
+button#logout {
+  margin-top: 2%;
+  border-color: #66f309;
+  border-radius: 5px;
+  padding: 0.5%;
+}
+
+div.editar form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 15% 10% 15% 10% 15% 10%;
+      grid-template-rows: 15% 10% 15% 10% 15% 10%;
+  -ms-grid-columns: 50%;
+      grid-template-columns: 50%;
+  padding: 20px;
+  margin: 40px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div.editar form button {
+  margin-left: 83%;
+  margin-top: 10px;
+  height: 50px;
+  width: 15%;
+  border-color: #66f309;
+  border-radius: 5px;
 }
 /*# sourceMappingURL=style.css.map */

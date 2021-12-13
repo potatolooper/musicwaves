@@ -1,6 +1,8 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 const express = require("express");
 const cookieParser = require("cookie-parser");
+var LocalStorage = require('node-localstorage').LocalStorage
+localStorage = new LocalStorage('./scratch');
 const connection = require('./Database/db')
 const authcontroller = require('./Controlers/authController')
 const songscontroller = require('./Controlers/songsController')
@@ -59,6 +61,23 @@ app.get("/log", (req, res) => {
 //Potatolooper@gmail.com
 //proyectofinal
 
+//Get Images of Playlist
+async function getPlaylistImg(userName){
+  const data = await spotifyApi.getUserPlaylists(userName);
+
+  let arrayTotal = [];
+  for (let playlist of data.body.items) {
+    //console.log(playlist.images[0].url);
+    arrayTotal.push(playlist.images[0].url);
+  }
+  
+  return arrayTotal;
+}
+
+
+
+
+
 //Get Profile Data from User
 function getData(token) {
   spotifyApi.setAccessToken(token);
@@ -86,6 +105,7 @@ async function getUserPlaylists(userName) {
   //console.log(arrayTotal[1]);
   return arrayTotal;
 }
+
 
 //Get Songs From Playlist
 
@@ -195,33 +215,43 @@ app.get("/register", authcontroller.register)
 
 app.post("/auth",authcontroller.login)
 
-
+app.post("/envmsg",messagescontroller.addMessage)
 
 app.get("/LogIN", (req, res) => {
   var data = getData(spotifyApi.getAccessToken());
+  
+  
   data("playlist").then(v => {      
       spotifyApi.getMe()
       .then((u) => {
-        
+     
+      
         var user = u.body.display_name;
+       
         var image = " "
         if(!(u.body.images.length===0)){
            image = u.body.images[0].url
         }  
+        
+        getPlaylistImg(u.body.id)
+        .then((i)=>{
+
+       
         res.type("text/html");  
         res.render("LogIN.hbs",
           {
             Total: v,
             User: user,
-            ImageUser:image
+            ImageUser:image,
+            ImgsPly:i
           },
           function (err, html) {
             if (err) throw err;
             res.send(html);
-          } 
-        
-        );
+          });
+
       }); 
+    })  
   });
 });
 
@@ -244,10 +274,12 @@ app.get("/songs",(req,res)=>{
         if(!(u.body.images.length===0)){
            image = u.body.images[0].url
         } 
-
+      debugger;
+     
       let artists = [];
       let durations = [];
       let songs_ids = [];
+      let songs_images = []
 for (const ar of songs) {
     artists.push(ar.artists[0].name);
 };
@@ -256,6 +288,9 @@ for (const durar of songs) {
 }
 for (const ids of songs) {
   songs_ids.push(ids.id)
+}
+for (const img of songs) {
+    songs_images.push(img.album.images[2].url)
 }
 songscontroller.addSongs(songs_ids)
   res.type("text/html");  
@@ -267,7 +302,8 @@ songscontroller.addSongs(songs_ids)
             ImageUser:image,
             Songs:songs, 
             Artists:artists,
-            Durations:durations
+            Durations:durations,
+            Img_song:songs_images
           },
           function (err, html) {
             if (err) throw err;
@@ -282,38 +318,44 @@ songscontroller.addSongs(songs_ids)
 
 app.get("/msg",(req,res)=>{
 
-var id = req.query.song_id
+    var id = req.query.song_id
 
 connection.query('SELECT * FROM message WHERE Id_Song = ?',[id],(error,result)=>{
-    if (result==undefined){
+     var normales = []
+      var respuestas = []
+    if (result.length==0){
         console.log("No hay mensajes de esa cancion : " + error)
-    }
-
-    var normales = []
-    var respuestas = []
-    for (let i = 0; i < result.length; i++) {
-            normales[i]=[]
-            if(result[i].Id_Messages){     
-              respuestas[i]=[]
-              respuestas[i]["Id"]=(result[i].Id)
-              respuestas[i]["Message_user"]=(result[i].Message_user)
-              respuestas[i]["Menssage"]=(result[i].Menssage)
-              respuestas[i]["Positive"]=(result[i].Positive)
-              respuestas[i]["Negative"]=(result[i].Negative)
-              respuestas[i]["Id_Messages"]=(result[i].Id_Messages)
-              debugger;
 
     }else{
+   
+    for (let i = 0; i < result.length; i++) {
+           
+  
+            if(result[i].Id_Menssages){ 
+              x=0    
+              respuestas[x]=[]
+              respuestas[x]["Id"]=(result[i].Id)
+              respuestas[x]["Message_user"]=(result[i].Message_user)
+              respuestas[x]["Menssage"]=(result[i].Menssage)
+              respuestas[x]["Positive"]=(result[i].Positive)
+              respuestas[x]["Negative"]=(result[i].Negative)
+              respuestas[x]["Id_Menssages"]=(result[i].Id_Menssages)
+            x++;
+    }else{ 
+            normales[i]=[]
             normales[i]["Id"]=(result[i].Id)
             normales[i]["Message_user"]=(result[i].Message_user)
             normales[i]["Menssage"]=(result[i].Menssage)
             normales[i]["Positive"]=(result[i].Positive)
             normales[i]["Negative"]=(result[i].Negative)
-            normales[i]["Id_Messages"]=(result[i].Id_Messages)
-            debugger;
+            normales[i]["Id_Menssages"]=(result[i].Id_Menssages)
+      
           }
     }
- 
+    console.log(normales)
+    console.log(respuestas)
+
+ }
  spotifyApi.getTrack(req.query.song_id)
  .then((track)=>{
  spotifyApi.getMe()
@@ -326,6 +368,7 @@ connection.query('SELECT * FROM message WHERE Id_Song = ?',[id],(error,result)=>
 
  res.type("text/html");  
   res.render("Messages.hbs",{
+            Idong:id,
             Song:track.body.name,
             Name:user,
             User:user,
@@ -339,10 +382,32 @@ connection.query('SELECT * FROM message WHERE Id_Song = ?',[id],(error,result)=>
   });
  })
 })
+
 }) 
+
 })
 
-app.post("/envmsg",messagescontroller.addMessage)
+
+app.get("/edit",(req,res)=>{
+  var user  = req.query.Usuario
+  connection.query('SELECT Email,User FROM profiles WHERE User = ?',[user],(error,result)=>{
+      connection.query('SELECT COUNT(Id) FROM message WHERE Message_user = ?',[user],(error,resul)=>{
+        
+     
+  res.type("text/html");  
+  res.render("Profile.hbs",{
+            User:result[0].User,
+            Email:result[0].Email,
+            Post:resul[0][0]
+          })
+ })
+})
+  })
+
+
+app.get("/posi",messagescontroller.addPositive)
+
+app.get("/neg",messagescontroller.addNegative)
 
 
 

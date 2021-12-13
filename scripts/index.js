@@ -2,13 +2,22 @@ var email = $("#email")
 var register = $("#res")
 var user = $("#user")
 var pass = $("#pass")
-
+var login = $("#login")
 
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 const regis = urlParams.get('register')
 if (regis) {
     window.alert("El registro a sido Existoso")
+}
+if ( window.localStorage.getItem("Usuario")) {
+    user.val(window.localStorage.getItem("Usuario"))
+    pass.val(window.localStorage.getItem("Password"))
+}else{
+    login.on("click",(e)=>{
+        window.localStorage.setItem("Usuario",user.val())
+        window.localStorage.setItem("Password",pass.val())
+})
 }
 
 

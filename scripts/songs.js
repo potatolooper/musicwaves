@@ -1,18 +1,23 @@
 var links = document.getElementsByClassName("env_messages")
 
+
     for (const elem of links) {
         elem.addEventListener("click",(e)=>{
             var song_id = "" 
-           
-            song_id = $(e.target).parent().attr("id")
-             console.log(song_id)
-           window.location.replace("/msg?song_id="+song_id);
+            var id = ""
+            song_id = $(e.target)
+
+            if (song_id.prop("tagName") == "IMG") {
+               
+                id=song_id.parent().parent().attr("id")
+            }else{
+                id=song_id.parent().attr("id")
+            }
+             
+           window.location.replace("/msg?song_id="+id);
         })
         
+     
     }
-    
 
-    var edit = $("#edit")
-   edit.on("click",()=>{
-      window.location.href = "/edit";
-   })
+    

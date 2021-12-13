@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type='text/css' href="../style.css">
+        <link rel="stylesheet" type='text/css' href="../css/style.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <title>Logeado</title>
@@ -13,11 +13,10 @@
 <body style="background-color:rgb(29, 185, 84);" >
  
     <div id="intro_editar" >
-        <img src="../imagen3.jpg" alt="Imagen Usuario" width="100px" height="100px"> <div>Bienvenido <span id="user"> </span> </div>
+        <img src="../img/imagen3.jpg" alt="Imagen Usuario" width="100px" height="100px"> <div>Bienvenido {{User}} </div>
         Has publicado {{Post}} en lo que llevas con nosotros
         <br>
-        <div><button id= "volver"> Volver</button>
-        <button id="logout">Cerrar sesión</button></div>
+        <button id="logout">Cerrar sesión</button>
         </div>
 
         <div class="editar">
@@ -28,9 +27,9 @@
                 <label for="Username">Nombre de Usuario</label>
                 <input type="text" name="Username" id="user" placeholder="{{User}}">
                 <label for="ant_password">Antigua Contraseña </label>
-                <input type="password" name="ant_password" class="pass" placeholder="****************">
+                <input type="text" name="ant_password" id="pass" placeholder="****************">
                 <label for="password">Contraseña</label>
-                <input type="password" name="password" class="pass" placeholder="****************">
+                <input type="text" name="password" id="pass" placeholder="****************">
                 <button type="submit">Guardar cambios</button>
             </form>
         </div>
@@ -49,14 +48,11 @@
     </footer>
 </body>
 <script>
-  var logout = $("#logout")
 
-  logout.on("click",(e)=>{
-    window.localStorage.clear()
-    window.location.replace("/")
-  })
+
+
 
 </script>
-
+<script src="../Usuario.js"></script>
 <script src="../all.js"></script>
 </html>

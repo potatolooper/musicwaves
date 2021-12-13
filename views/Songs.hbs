@@ -13,13 +13,14 @@
 <div id="intro" >
         <img src="{{ImageUser}}" alt="Imagen Usuario" width="100px" height="100px"> <div>Bienvenido {{User}} </div>
         <div id="edit">Editar Perfil</div>
+         <div><button id= "volver"> Volver</button></div>
         </div>
     <div class="songs">
         <ul class="songs">
-            <li class="first_label"><div>Nombre</div><div>Artista</div><div>Duracion</div></li>
+            <li class="first_label"><div>Imagen</div><div>Nombre</div><div>Artista</div><div>Duracion</div></li>
     {{#each Songs}}
         
-        <li><div class="name">{{this.name}}</div> <div class="artist" ></div> <div class="duration"></div> <button class="env_messages"><img src="../link.png" alt="" srcset=""></button> </li>
+        <li><div class="img"><img class=" logo" alt=""></div><div class="name">{{this.name}}</div> <div class="artist" ></div> <div class="duration"></div> <button class="env_messages"><img src="../link.png" alt="" srcset=""></button> </li>
        
         {{/each}}
         </ul> 
@@ -50,6 +51,7 @@
         var artists = [];
         var durations = [];
         var songs_ids = [];
+        var songs_img = []
 
     function millisToMinutesAndSeconds(millis)  {
     var minutes = Math.floor(millis / 60000);
@@ -69,13 +71,16 @@
         {{#each Ids}}
             songs_ids.push('{{this}}')
         {{/each}}
-
+        {{#each Img_song}}
+            songs_img.push('{{this}}')
+        {{/each}}
         
        for (let i = 0; i < artists.length; i++) {
             const li = $('ul.songs').children()[i+1];
             li.setAttribute("id",songs_ids[i])
-            li.children[1].innerHTML= artists[i]
-            li.children[2].innerHTML= durations[i] + " min";
+            li.children[0].children[0].setAttribute("src",songs_img[i])
+            li.children[2].innerHTML= artists[i]
+            li.children[3].innerHTML= durations[i] + " min";
             
     }
   
@@ -83,4 +88,5 @@
         
     </script>
     <script src="../songs.js"></script>
+    <script src="../all.js"></script>
 </html>

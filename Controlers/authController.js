@@ -12,7 +12,11 @@ exports.register = async (req,res)=>{
         const pass = req.query.pass
         let passHash = await bcryptjs.hash(pass,8)
         //console.log(passHash)
-       
+        connection.query('SELECT User FROM profiles WHERE User = ?', [user],async(error,result)=>{
+                if (result[0].lenght!=0) {
+                    res.send("Elige otro usuario")
+                }
+        })
         connection.query('INSERT INTO profiles SET ?',{Email:email,User:user,Password:passHash},(error,result)=>{
             if (error) {
                 console.log(error)}
@@ -58,6 +62,7 @@ exports.login = async(req,res)=>{
                         httpOnly: true
                    }
                    res.cookie('jwt', token, cookiesOptions)
+                   
                    res.redirect("/log")
                 }
             })

@@ -41,23 +41,32 @@
      var list = $("#list");
     
 let info = '{{Total}}';
-console.log(info)
+
 let infoarry = info.split(',');
-console.log(infoarry)
+
 let nameplaylist = infoarry.slice((infoarry.length)/2)
-console.log(nameplaylist)
+
 let idplaylist = infoarry.slice(0,(infoarry.length/2))
 
+let imgplaylist = []
+{{#each ImgsPly}}
+    imgplaylist.push('{{this}}')
 
+{{/each}}
+console.log(imgplaylist)
 for (let i = 0; i <nameplaylist.length; i++) {
      const np = nameplaylist[i];
       let names = document.createElement("div");
       let as = document.createElement("a");
+      let img = document.createElement("img")
       as.setAttribute("href","/songs?id="+idplaylist[i]+"&name="+np)
       names.setAttribute("id",idplaylist[i])
-      as.append(np) 
+      img.setAttribute("src",imgplaylist[i])
+      img.setAttribute("class","img_pls")
+      as.append(np)
+      names.append(img) 
      names.append(as)
-    console.log(names)
+
     list.append(names)  
    }
 
@@ -67,4 +76,5 @@ let divs = list.children("divs")
 //  let playlistIDarray = playlistID.split(',')
 
    </script>
+   <script src="../all.js"></script>
 </html>

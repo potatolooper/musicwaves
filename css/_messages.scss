@@ -27,6 +27,7 @@ ul.comments{
     form.comments textarea{
         border-color: rgb(102, 243, 9);
         border-radius: 20px;
+        padding: 10px;
         
     }
     form.comments button{
@@ -40,7 +41,7 @@ ul.comments{
     div.puntuation{
         text-align: center;
     }
-    button.positives,button.negative{
+    button.positives,button.negatives{
        border: none;
        font-size: larger;
     }
@@ -96,4 +97,8 @@ ul.comments{
        margin-left: 2px;
        margin-bottom: 1px;
         
+    }
+    ul.comments li.old-r{
+       
+        margin-left: 10%;
     }

@@ -13,6 +13,7 @@
 <div id="intro" >
         <img src="{{ImageUser}}" alt="Imagen Usuario" width="100px" height="100px"> <div>Bienvenido {{User}} </div>
       <div id="edit">Editar Perfil</div>
+       <div><button id= "volver"> Volver</button></div>
     </div>
     
     <div class="comments">
@@ -23,7 +24,9 @@
             <div class="user"> {{Name}}
             </div>
 
-            <form action="#" class="comments" method="post">
+            <form action="/envmsg" class="comments" method="post">
+            <input type="text" name="id_song" id="" style="display: none;" value="{{Idong}}">
+            <input type="text" name="user" id="" style="display: none;" value="{{Name}}">
              <textarea name="message" id="message" cols="160" rows="5"></textarea>
             <button type="submit">Publicar</button>
             </form> </li>
@@ -36,7 +39,7 @@
             </div>
             <div class="puntuation">
                 <button class="positives" ><img src="../up-arrow.png" alt="flecha hacia arriba" srcset="">{{this.Positive}}</button>
-                <button class="negative" > <img src="../down-arrow.png" alt="flecha hacia abajo" srcset="">{{this.Negative}}</button>
+                <button class="negatives" > <img src="../down-arrow.png" alt="flecha hacia abajo" srcset="">{{this.Negative}}</button>
             </div>
               <div class="oldcomments">
               
@@ -52,7 +55,10 @@
 
         <li class="reply" style="display: none;" >
             
-            <form action="/responder" class="comments" method="post">
+            <form action="/envmsg" class="comments" method="post">
+           <input type="text" name="id_song" id="idong" style="display: none;" >
+            <input type="text" name="id_message" id="" style="display: none;" value="{{this.Id}}">
+             <input type="text" name="user" id="userrepl" style="display: none;" >
              <textarea name="message" id="message" cols="160" rows="5"></textarea>
             <button type="submit">Responder</button>
             </form> 
@@ -81,20 +87,48 @@
     </footer>
 </body>
 <script>
+var idong = $("#idong")
+  idong.val('{{Idong}}');
+
+var userreply = $("#userrepl")
+  userreply.val('{{Name}}')
 
   var posi = $(".positives")
   var neg = $(".negatives")
 
 
-  console.log(posi);
-
-
-
   
-   var edit = $("#edit")
-   edit.on("click",()=>{
-      window.location.href = "/edit";
-   })
+
+ for (let i = 0; i < posi.length; i++) {
+      console.log(posi[i])
+      $(posi[i]).on("click",(e)=>{
+          console.log(e.target)
+          var msg_id ="";
+          var targ = $(e.target);
+      if (targ.prop("tagName") == "IMG") {
+               msg_id= targ.parent().parent().parent().attr("id")
+            }else{
+                msg_id = targ.parent().parent().attr("id")
+            }
+        window.location.href = "/posi?song_id="+'{{Idong}}'+'&msg_id='+msg_id;
+      })
+   
+     }
+
+for (let i = 0; i < neg.length; i++) {
+      console.log(neg[i])
+      $(neg[i]).on("click",(e)=>{
+      console.log(e.target)
+          var msg_id ="";
+          var targ = $(e.target);
+      if (targ.prop("tagName") == "IMG") {
+               msg_id= targ.parent().parent().parent().attr("id")
+            }else{
+                msg_id = targ.parent().parent().attr("id")
+            }
+        window.location.href = "/neg?song_id="+'{{Idong}}'+'&msg_id='+msg_id;     })
+   
+     }
 
 
 
@@ -106,6 +140,7 @@
      buttonid.on("click",(e)=>{
        var targ = $(e.target).parent().next()
       targ.css("display","grid ");
+      $(e.target).css("display","none");
      })
   {{/each}}
    var lis = $(".old")
@@ -113,15 +148,17 @@
 
 
     {{#each Replys}}
+    
+
     for (let i = 0; i < lis.length; i++) {
-      console.log(lis[i].getAttribute("id"))
-    if({{this.Id_Messages}} === lis[i].getAttribute("id") ){
-        var texto = '<li class="old" id="{{this.Id}}">'+
+     lis[i].getAttribute("id")
+    if({{this.Id_Menssages}} == lis[i].getAttribute("id") ){
+        var texto = '<li class="old-r" id="{{this.Id}}">'+
            ' <div class="user"> {{this.Message_user}}'+
           '</div>'+
           '<div class="puntuation">'+
                 '<button class="positives" ><img src="../up-arrow.png" alt="flecha hacia arriba" srcset="">{{this.Positive}}</button>'+
-                '<button class="negative" > <img src="../down-arrow.png" alt="flecha hacia abajo" srcset="">{{this.Negative}}</button>'+
+                '<button class="negatives" > <img src="../down-arrow.png" alt="flecha hacia abajo" srcset="">{{this.Negative}}</button>'+
             '</div>'+
               '<div class="oldcomments">'+
               
@@ -131,12 +168,22 @@
                       '{{this.Menssage}}'+
                 '</div>'+
               '</div>'+
-                '<button class="respuesta" id="2">Responder</button>'+
+                '<button class="respuesta" id="{{this.Id}}r">Responder</button>'+
                 
             '</li>'
-           $( texto ).insertAfter(lis[i])
+           $( texto ).insertAfter(lis[i]) 
+           
+           var buttonid = $("#{{this.Id}}r")
+      
+     buttonid.on("click",(e)=>{
+       var targ = $(e.target).parent().next()
+      targ.css("display","grid ");
+      $(e.target).css("display","none");
+     })
+     
 } 
 }
      {{/each}}
 </script>
+<script src="../all.js"></script>
 </html>

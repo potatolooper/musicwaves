@@ -1,0 +1,43 @@
+div#intro_editar{
+    text-align: center;
+    margin: 20px;
+    margin-bottom:100px;
+    margin-right: 2%;
+}
+
+div#intro_editar img{
+    border-style: solid;
+    border-radius:10px;
+    border-color: rgb(158, 233, 184);
+    
+}
+
+div.editar{
+    margin: 0px 10% ;
+}
+button#logout{
+    margin-top: 2%;
+    border-color: rgb(102, 243, 9);
+    border-radius: 5px;
+    padding: 0.5%;
+}
+
+
+div.editar form{
+    display: grid;
+    grid-template-rows: 15% 10% 15% 10% 15% 10% ;
+    grid-template-columns:50% ;
+    padding: 20px;
+    margin: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+div.editar form button{
+    margin-left: 83%;
+    margin-top: 10px;
+    height: 50px;
+    width: 15%;
+    border-color: rgb(102, 243, 9);
+    border-radius: 5px;
+}
