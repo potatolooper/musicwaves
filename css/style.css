@@ -324,18 +324,24 @@ div#list {
   border-style: solid;
   border-radius: 10px;
   margin: 5px;
-  grid-auto-rows: 50px;
+  grid-auto-rows: 60px;
+  justify-items: center;
+}
+
+div#list div a {
+  font-size: 25px;
 }
 
 button#volver {
   margin-top: 1%;
+  margin-right: 0.5%;
   border-color: #66f309;
   border-radius: 5px;
   padding: 0.5%;
 }
 
 img.img_pls {
-  height: 40px;
+  height: 60px;
   margin-right: 20px;
 }
 
@@ -372,6 +378,7 @@ div.songs {
 button.env_messages {
   border: none;
   background-color: #7df0a5;
+  height: 25px;
 }
 
 .title {
